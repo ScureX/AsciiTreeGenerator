@@ -25,14 +25,36 @@ namespace AsciiTreeGenerator
 
         static void Main(string[] args)
         {
-            for (int i = 0; i < 10; i++)
+            int size = 50;
+            int amount = 1;
+
+            for (int i = 0; i < args.Length; i++)
             {
-                MakeTree(random, 50);
+                switch (args[i])
+                {
+                    case "--size" when i + 1 < args.Length:
+                    case "-s" when i + 1 < args.Length:
+                        int.TryParse(args[i + 1], out size);
+                        break;
+                    case "--amount" when i + 1 < args.Length:
+                    case "-a" when i + 1 < args.Length:
+                        int.TryParse(args[i + 1], out amount);
+                        break;
+                    case "--variation" when i + 1 < args.Length:
+                    case "-v" when i + 1 < args.Length:
+                        int.TryParse(args[i + 1], out variation);
+                        break;
+                }
+            }
+
+            for (int i = 0; i < amount; i++)
+            {
+                MakeTree(random, size);
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
             }
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         static int[] GenerateFirstRow(int size)
